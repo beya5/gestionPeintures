@@ -27,7 +27,7 @@ class User
     private ?string $cin = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?personne $personne = null;
+    private ?Personne $personne = null;
 
     public function getId(): ?int
     {
@@ -82,12 +82,12 @@ class User
         return $this;
     }
 
-    public function getPersonne(): ?personne
+    public function getPersonne(): ?Personne
     {
         return $this->personne;
     }
 
-    public function setPersonne(?personne $personne): static
+    public function setPersonne(?Personne $personne): static
     {
         $this->personne = $personne;
 

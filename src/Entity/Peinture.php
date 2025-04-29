@@ -44,9 +44,9 @@ class Peinture
     private Collection $commentaires;
 
     /**
-     * @var Collection<int, categorie>
+     * @var Collection<int, Categorie>
      */
-    #[ORM\ManyToMany(targetEntity: categorie::class, inversedBy: 'peintures')]
+    #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'peintures')]
     private Collection $categories;
 
     public function __construct()
@@ -175,14 +175,14 @@ class Peinture
     }
 
     /**
-     * @return Collection<int, categorie>
+     * @return Collection<int, Categorie>
      */
     public function getCategories(): Collection
     {
         return $this->categories;
     }
 
-    public function addCategory(categorie $category): static
+    public function addCategory(Categorie $category): static
     {
         if (!$this->categories->contains($category)) {
             $this->categories->add($category);
@@ -191,7 +191,7 @@ class Peinture
         return $this;
     }
 
-    public function removeCategory(categorie $category): static
+    public function removeCategory(Categorie $category): static
     {
         $this->categories->removeElement($category);
 
