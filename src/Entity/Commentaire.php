@@ -24,10 +24,10 @@ class Commentaire
     private ?\DateTimeInterface $date = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?personne $personne = null;
+    private ?Personne $personne = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
-    private ?peinture $peinture = null;
+    private ?Peinture $peinture = null;
 
     public function getId(): ?int
     {
@@ -70,24 +70,24 @@ class Commentaire
         return $this;
     }
 
-    public function getPersonne(): ?personne
+    public function getPersonne(): ?Personne
     {
         return $this->personne;
     }
 
-    public function setPersonne(?personne $personne): static
+    public function setPersonne(Personne $personne): static
     {
         $this->personne = $personne;
 
         return $this;
     }
 
-    public function getPeinture(): ?peinture
+    public function getPeinture(): ?Peinture
     {
         return $this->peinture;
     }
 
-    public function setPeinture(?peinture $peinture): static
+    public function setPeinture(?Peinture $peinture): static
     {
         $this->peinture = $peinture;
 

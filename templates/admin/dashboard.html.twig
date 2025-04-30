@@ -1,0 +1,17 @@
+{# templates/admin/dashboard.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des Peintures{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur le tableau de bord de la gestion des peintures</h1>
+
+    <ul>
+        <li><a href="/peinture">Peintures</a></li>
+        <li><a href="/personne">Personnes</a></li>
+        <li><a href="/categorie">Catégories</a></li>
+        <li><a href="/commentaire">Commentaires</a></li>
+        <li><a href="/user">Utilisateurs</a></li>
+    </ul>
+{% endblock %}

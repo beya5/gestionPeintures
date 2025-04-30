@@ -5,9 +5,13 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[UniqueEntity(fields: ['eamillogin'], message: 'There is already an account with this emaillogin')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,7 +21,7 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
+    #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
     #[ORM\Column(length: 50)]
@@ -27,7 +31,7 @@ class User
     private ?string $cin = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?personne $personne = null;
+    private ?Personne $personne = null;
 
     public function getId(): ?int
     {
@@ -82,15 +86,24 @@ class User
         return $this;
     }
 
-    public function getPersonne(): ?personne
+    public function getPersonne(): ?Personne
     {
         return $this->personne;
     }
 
-    public function setPersonne(?personne $personne): static
+    public function setPersonne(?Personne $personne): static
     {
         $this->personne = $personne;
 
         return $this;
     }
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->eamillogin;
+    }
+
+    public function eraseCredentials(): void
+    {
+    }
+
 }
