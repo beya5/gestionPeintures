@@ -153,3 +153,14 @@ a8d42f,::1,GET,http://localhost:8000/login,1746046082,,500,request
 98b131,::1,GET,http://localhost:8000/login,1746047627,,200,request
 dc6222,::1,POST,http://localhost:8000/login,1746047639,,302,request
 f85076,::1,GET,http://localhost:8000/peinture,1746047640,,200,request
+6566e4,::1,GET,http://localhost:8000/register,1746047723,,200,request
+414de6,::1,POST,http://localhost:8000/register,1746047978,,302,request
+0374f5,::1,GET,http://localhost:8000/login,1746047979,,200,request
+d6fecf,::1,POST,http://localhost:8000/login,1746047995,,302,request
+99cd35,::1,GET,http://localhost:8000/login,1746047996,,200,request
+f52238,::1,POST,http://localhost:8000/login,1746048011,,302,request
+536111,::1,GET,http://localhost:8000/login,1746048011,,200,request
+51d319,::1,POST,http://localhost:8000/login,1746048037,,302,request
+6d896f,::1,GET,http://localhost:8000/login,1746048037,,200,request
+e8b635,::1,POST,http://localhost:8000/login,1746049250,,302,request
+2dc3a7,::1,GET,http://localhost:8000/admin,1746049251,,200,request
