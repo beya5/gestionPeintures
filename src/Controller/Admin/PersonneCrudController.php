@@ -5,8 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Personne;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+
 
 class PersonneCrudController extends AbstractCrudController
 {
@@ -15,14 +17,16 @@ class PersonneCrudController extends AbstractCrudController
         return Personne::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            IdField::new('id')->onlyOnIndex(), 
+            TextField::new('nom'), 
+            TextField::new('prenom'), 
+            IntegerField::new('tel'),
+            TextField::new('cin'), 
+            AssociationField::new('commentaires') 
+                ->onlyOnIndex(), 
         ];
     }
-    
 }

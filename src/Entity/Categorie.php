@@ -28,7 +28,10 @@ class Categorie
     {
         $this->peintures = new ArrayCollection();
     }
-
+    public function __toString(): string
+    {
+        return $this->designation; 
+    }
     public function getId(): ?int
     {
         return $this->id;

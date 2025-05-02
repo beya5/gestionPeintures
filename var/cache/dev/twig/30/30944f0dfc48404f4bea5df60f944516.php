@@ -73,7 +73,7 @@ class __TwigTemplate_18151fc5dd4c9b198b23e7463a457b42 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
 
-        yield "New Commentaire";
+        yield "Nouveau Commentaire";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
 
@@ -97,17 +97,33 @@ class __TwigTemplate_18151fc5dd4c9b198b23e7463a457b42 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        yield "    <h1>Create new Commentaire</h1>
+        yield "    <h1>Ajouter un commentaire pour \"";
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 6, $this->source); })()), "nom", [], "any", false, false, false, 6), "html", null, true);
+        yield "\"</h1>
 
     ";
         // line 8
-        yield Twig\Extension\CoreExtension::include($this->env, $context, "commentaire/_form.html.twig");
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 8, $this->source); })()), 'form_start');
+        yield "
+        ";
+        // line 9
+        yield $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), 'widget');
+        yield "
+        <button class=\"btn btn-primary\">";
+        // line 10
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(((array_key_exists("button_label", $context)) ? (Twig\Extension\CoreExtension::default((isset($context["button_label"]) || array_key_exists("button_label", $context) ? $context["button_label"] : (function () { throw new RuntimeError('Variable "button_label" does not exist.', 10, $this->source); })()), "Enregistrer")) : ("Enregistrer")), "html", null, true);
+        yield "</button>
+    ";
+        // line 11
+        yield         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 11, $this->source); })()), 'form_end');
         yield "
 
     <a href=\"";
-        // line 10
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_commentaire_index");
-        yield "\">back to list</a>
+        // line 13
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_peinture_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 13, $this->source); })()), "id", [], "any", false, false, false, 13)]), "html", null, true);
+        yield "\" class=\"btn btn-light mt-3\">
+        Retour à la peinture
+    </a>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -139,22 +155,26 @@ class __TwigTemplate_18151fc5dd4c9b198b23e7463a457b42 extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  109 => 10,  104 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
+        return array (  123 => 13,  118 => 11,  114 => 10,  110 => 9,  106 => 8,  100 => 6,  87 => 5,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
         return new Source("{% extends 'base.html.twig' %}
 
-{% block title %}New Commentaire{% endblock %}
+{% block title %}Nouveau Commentaire{% endblock %}
 
 {% block body %}
-    <h1>Create new Commentaire</h1>
+    <h1>Ajouter un commentaire pour \"{{ peinture.nom }}\"</h1>
 
-    {{ include('commentaire/_form.html.twig') }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class=\"btn btn-primary\">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
 
-    <a href=\"{{ path('app_commentaire_index') }}\">back to list</a>
-{% endblock %}
-", "commentaire/new.html.twig", "C:\\Users\\PC NOURHEN\\Documents\\peinture\\gestionPeintures\\templates\\commentaire\\new.html.twig");
+    <a href=\"{{ path('app_peinture_show', {'id': peinture.id}) }}\" class=\"btn btn-light mt-3\">
+        Retour à la peinture
+    </a>
+{% endblock %}", "commentaire/new.html.twig", "C:\\Users\\PC NOURHEN\\Documents\\peinture\\gestionPeintures\\templates\\commentaire\\new.html.twig");
     }
 }

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>{% if form.vars.value.id %}Modifier{% else %}Nouveau{% endif %} Commentaire</h1>
+    <h5>Pour: {{ peinture.nom }}</h5>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">Enregistrer</button>
+        <a href="{{ path('app_user_commentaires') }}" class="btn btn-secondary">
+            Annuler
+        </a>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

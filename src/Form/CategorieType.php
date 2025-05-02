@@ -17,8 +17,9 @@ class CategorieType extends AbstractType
             ->add('designation')
             ->add('peintures', EntityType::class, [
                 'class' => Peinture::class,
-'choice_label' => 'id',
-'multiple' => true,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => false, 
             ])
         ;
     }

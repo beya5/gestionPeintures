@@ -1,23 +1,33 @@
 <?php
 
 namespace App\Controller\Admin;
+
 use App\Entity\Peinture;
 use App\Entity\Personne;
 use App\Entity\Categorie;
 use App\Entity\Commentaire;
 use App\Entity\User;
-use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
-    public function index(): Response
+    private AdminUrlGenerator $adminUrlGenerator;
+
+    public function __construct(AdminUrlGenerator $adminUrlGenerator)
     {
-        return $this->render('admin/dashboard.html.twig');
+        $this->adminUrlGenerator = $adminUrlGenerator;
+    }
+
+    #[Route('/admin/dashboard', name: 'app_admin_dashboard')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function adminDashboard(): Response
+    {
+    return $this->render('admin/dashboard.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -26,5 +36,13 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Gestion des Peintures');
     }
 
-    
+    public function configureMenuItems(): iterable
+    {
+        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Peintures', 'fa fa-paint-brush', Peinture::class);
+        yield MenuItem::linkToCrud('Personnes', 'fa fa-user', Personne::class);
+        yield MenuItem::linkToCrud('Catégories', 'fa fa-tags', Categorie::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fa fa-comments', Commentaire::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-users', User::class);
+    }
 }

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Commentaire;
+use App\Form\CommentaireType;
+use App\Entity\Personne; 
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -10,71 +12,71 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use App\Repository\PeintureRepository;
+use App\Repository\CommentaireRepository;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+#[IsGranted('ROLE_USER')]
 #[Route('/user')]
 final class UserController extends AbstractController{
-    #[Route(name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/dashboard', name: 'app_user_dashboard')]
+    public function dashboard(PeintureRepository $peintureRepository): Response
     {
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+        return $this->render('user/dashboard.html.twig', [
+            'peintures' => $peintureRepository->findAllVisible(),
         ]);
     }
 
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/commentaires', name: 'app_user_commentaires')]
+    public function commentaires(CommentaireRepository $commentaireRepository): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $user = $this->getUser();
+        return $this->render('user/commentaires.html.twig', [
+            'commentaires' => $commentaireRepository->findBy(['personne' => $user])
+        ]);
+    }
+
+    #[Route('/commentaire/new/{peintureId}', name: 'app_user_commentaire_new')]
+    public function newCommentaire(Request $request, EntityManagerInterface $em, int $peintureId, PeintureRepository $peintureRepo): Response
+    {
+        $commentaire = new Commentaire();
+        $peinture = $peintureRepo->find($peintureId);
+        
+        $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            /** @var Personne $user */
+            $user = $this->getUser();
+            if (!$user instanceof Personne) {
+                throw new \RuntimeException('L\'utilisateur doit être une Personne');
+            }
+            
+            $commentaire->setPersonne($user)
+                       ->setPeinture($peinture)
+                       ->setDate(new \DateTime());
+            
+            $em->persist($commentaire);
+            $em->flush();
+    
+            return $this->redirectToRoute('app_user_commentaires');
         }
-
-        return $this->render('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
+    
+        return $this->render('user/commentaire_form.html.twig', [
+            'form' => $form->createView(),
+            'peinture' => $peinture
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
-        ]);
-    }
+    #[Route('/commentaire/delete/{id}', name: 'app_user_commentaire_delete')]
+    public function deleteCommentaire(
+        EntityManagerInterface $em, 
+        Commentaire $commentaire
+    ): Response {
+        $this->denyAccessUnlessGranted('DELETE', $commentaire);
+        
+        $em->remove($commentaire);
+        $em->flush();
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_commentaires');
     }
 }

@@ -8,12 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PersonneRepository::class)]
-class Personne
+class Personne extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+  
 
     #[ORM\Column(length: 20)]
     private ?string $nom = null;
@@ -35,7 +32,12 @@ class Personne
 
     public function __construct()
     {
+        parent::__construct();
         $this->commentaires = new ArrayCollection();
+    }
+    public function __toString(): string
+    {
+        return $this->prenom.' '.$this->nom; 
     }
 
     public function getId(): ?int

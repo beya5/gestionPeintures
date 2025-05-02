@@ -1,23 +1,57 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Register{% endblock %}
-
-{% block body %}
+<div class="container mt-4">
     <h1>Register</h1>
 
-    {{ form_errors(registrationForm) }}
-
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.eamillogin) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-        }) }}
-    {{ form_row(registrationForm.personneCin) }}
-    {{ form_row(registrationForm.personneNom) }}
-    {{ form_row(registrationForm.personnePrenom) }}
-    {{ form_row(registrationForm.personneTel) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="mb-3">
+            {{ form_row(registrationForm.eamillogin, {
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form_row(registrationForm.plainPassword, {
+                'attr': {'class': 'form-control'}
+            }) }}
+        </div>
+        
+        <div class="mb-3 form-check">
+            {{ form_row(registrationForm.agreeTerms, {
+                'attr': {'class': 'form-check-input'}
+            }) }}
+        </div>
+        
+        <h3 class="mt-4">Personal Information</h3>
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_row(registrationForm.cin, {
+                    'attr': {'class': 'form-control'},
+                    'label': 'CIN'
+                }) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_row(registrationForm.tel, {
+                    'attr': {'class': 'form-control'},
+                    'label': 'Phone Number'
+                }) }}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_row(registrationForm.nom, {
+                    'attr': {'class': 'form-control'},
+                    'label': 'Last Name'
+                }) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_row(registrationForm.prenom, {
+                    'attr': {'class': 'form-control'},
+                    'label': 'First Name'
+                }) }}
+            </div>
+        </div>
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-primary">Register</button>
     {{ form_end(registrationForm) }}
-{% endblock %}
+</div>

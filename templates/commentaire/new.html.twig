@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Commentaire{% endblock %}
+{% block title %}Nouveau Commentaire{% endblock %}
 
 {% block body %}
-    <h1>Create new Commentaire</h1>
+    <h1>Ajouter un commentaire pour "{{ peinture.nom }}"</h1>
 
-    {{ include('commentaire/_form.html.twig') }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+    {{ form_end(form) }}
 
-    <a href="{{ path('app_commentaire_index') }}">back to list</a>
+    <a href="{{ path('app_peinture_show', {'id': peinture.id}) }}" class="btn btn-light mt-3">
+        Retour à la peinture
+    </a>
 {% endblock %}

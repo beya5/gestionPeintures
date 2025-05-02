@@ -3,32 +3,22 @@
 namespace App\Form;
 
 use App\Entity\Commentaire;
-use App\Entity\peinture;
-use App\Entity\personne;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Peinture;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class CommentaireType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom')
-            ->add('contenu')
-            ->add('date', null, [
-                'widget' => 'single_text'
-            ])
-            ->add('personne', EntityType::class, [
-                'class' => personne::class,
-'choice_label' => 'id',
-            ])
-            ->add('peinture', EntityType::class, [
-                'class' => peinture::class,
-'choice_label' => 'id',
-            ])
-        ;
+            ->add('contenu', TextareaType::class, [
+                'label' => 'Votre commentaire',
+                'attr' => ['rows' => 5]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

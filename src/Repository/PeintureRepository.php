@@ -16,6 +16,16 @@ class PeintureRepository extends ServiceEntityRepository
         parent::__construct($registry, Peinture::class);
     }
 
+
+    public function findAllVisible(): array
+    {
+    return $this->createQueryBuilder('p')
+        ->where('p.en_vente = true')
+        ->orderBy('p.date_realisation', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
+
 //    /**
 //     * @return Peinture[] Returns an array of Peinture objects
 //     */
