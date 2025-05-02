@@ -19,10 +19,17 @@ class UserType extends AbstractType
             ->add('eamillogin')
             ->add('cin')
             ->add('personne', EntityType::class, [
-                'class' => personne::class,
-'choice_label' => 'id',
-            ])
-        ;
+                'class' => Personne::class,
+                'choice_label' => function ($personne) {
+                    return $personne->getPrenom().' '.$personne->getNom();
+                },
+                
+            ]);
+            $builder->add('password', PasswordType::class, [
+                'required' => true,
+                'mapped' => false, 
+                'attr' => ['autocomplete' => 'new-password']]);
+        
     }
 
     public function configureOptions(OptionsResolver $resolver): void

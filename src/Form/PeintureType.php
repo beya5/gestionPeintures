@@ -8,6 +8,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class PeintureType extends AbstractType
 {
@@ -19,15 +21,24 @@ class PeintureType extends AbstractType
             ->add('hauteur')
             ->add('en_vente')
             ->add('prix')
-            ->add('date_realisation', null, [
-                'widget' => 'single_text'
+            ->add('date_realisation', DateTimeType::class, [ 
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
             ])
             ->add('description')
             ->add('categories', EntityType::class, [
-                'class' => categorie::class,
-'choice_label' => 'id',
-'multiple' => true,
+                'class' => Categorie::class,
+                'choice_label' => 'nom', 
+                'multiple' => true,
+                'expanded' => false, 
             ])
+            ->add('imageUrl', UrlType::class, [
+                'label' => 'URL de l\'image',
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'https://example.com/image.jpg'
+                ]
+            ]);
         ;
     }
 
