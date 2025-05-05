@@ -1,0 +1,13 @@
+d54eee,::1,GET,http://localhost:8000/login,1746479679,,200,request
+a64fb8,::1,GET,http://localhost:8000/login,1746479689,ae9701,500,request
+ae9701,::1,POST,http://localhost:8000/login,1746479689,,500,request
+fe5df9,::1,GET,http://localhost:8000/login,1746480185,,302,request
+e16262,::1,GET,http://localhost:8000/admin/dashboard,1746480187,,200,request
+4322f1,::1,GET,http://localhost:8000/admin,1746480207,,200,request
+1d969b,::1,GET,http://localhost:8000/logout,1746480213,,302,request
+7af9cb,::1,GET,http://localhost:8000/login,1746480213,,200,request
+e22cb9,::1,POST,http://localhost:8000/login,1746480225,,302,request
+0ae74a,::1,GET,http://localhost:8000/peinture,1746480225,0348ae,500,request
+0348ae,::1,GET,http://localhost:8000/peinture,1746480225,,500,request
+e1916d,::1,GET,http://localhost:8000/login,1746482798,,302,request
+f18ba5,::1,GET,http://localhost:8000/user/dashboard,1746482799,,200,request
