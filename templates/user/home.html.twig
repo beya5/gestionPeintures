@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil Utilisateur{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Bienvenue {{ app.user.prenom ?? app.user.username }}</h1>
+
+    <div class="d-flex flex-column gap-3 mt-4">
+        <a href="{{ path('app_peinture_index') }}" class="btn btn-primary btn-lg">
+            🎨 Voir les peintures
+        </a>
+        <a href="{{ path('app_user_commentaires') }}" class="btn btn-secondary btn-lg">
+            💬 Voir mes commentaires
+        </a>
+        <a href="{{ path('app_logout') }}" class="btn btn-outline-danger btn-lg">
+            🚪 Déconnexion
+        </a>
+    </div>
+</div>
+{% endblock %}

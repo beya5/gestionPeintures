@@ -23,7 +23,8 @@ class Commentaire
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commentaires')]
+    #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'commentaires')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Personne $personne = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]

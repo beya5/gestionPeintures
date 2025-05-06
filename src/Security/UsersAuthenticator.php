@@ -43,19 +43,21 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
     }
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-            return new RedirectResponse($targetPath);
-        }
-
-        $user = $token->getUser();
-
-        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
-            return new RedirectResponse($this->urlGenerator->generate('admin')); // route vers le DashboardController
-        }
-
-        return new RedirectResponse($this->urlGenerator->generate('app_peinture_index'));
+{
+    if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+        return new RedirectResponse($targetPath);
     }
+
+    $user = $token->getUser();
+
+    if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+       
+        return new RedirectResponse($this->urlGenerator->generate('app_admin_dashboard'));
+    }
+
+    return new RedirectResponse($this->urlGenerator->generate('app_peinture_index'));
+}
+
 
     protected function getLoginUrl(Request $request): string
     {

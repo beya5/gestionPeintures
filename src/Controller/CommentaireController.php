@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Entity\Peinture;
 
 use App\Entity\Commentaire;
 use App\Form\CommentaireType;
@@ -21,13 +22,13 @@ final class CommentaireController extends AbstractController{
     {
         return $this->render('commentaire/index.html.twig', [
             'commentaires' => $commentaireRepository->findBy(
-                ['nom' => $this->getUser()],
+                ['nom' => $this->getUser()->getNom()],
                 ['date' => 'DESC']
             ),
         ]);
     }
 
-    // Création d'un nouveau commentaire pour une peinture spécifique
+  
     #[Route('/new/{peintureId}', name: 'app_commentaire_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_USER')]
     public function new(
@@ -42,7 +43,7 @@ final class CommentaireController extends AbstractController{
         }
 
         $commentaire = new Commentaire();
-        $commentaire->setAuteur($this->getUser());
+        $commentaire->setPersonne($this->getUser());
         $commentaire->setPeinture($peinture);
         $commentaire->setDateCreation(new \DateTimeImmutable());
 
@@ -64,7 +65,6 @@ final class CommentaireController extends AbstractController{
         ]);
     }
 
-    // Affichage d'un commentaire (peut-être optionnel selon vos besoins)
     #[Route('/{id}', name: 'app_commentaire_show', methods: ['GET'])]
     #[IsGranted('COMMENTAIRE_VIEW', 'commentaire')]
     public function show(Commentaire $commentaire): Response
@@ -74,7 +74,6 @@ final class CommentaireController extends AbstractController{
         ]);
     }
 
-    // Édition d'un commentaire
     #[Route('/{id}/edit', name: 'app_commentaire_edit', methods: ['GET', 'POST'])]
     #[IsGranted('COMMENTAIRE_EDIT', 'commentaire')]
     public function edit(
@@ -99,7 +98,6 @@ final class CommentaireController extends AbstractController{
         ]);
     }
 
-    // Suppression d'un commentaire
     #[Route('/{id}', name: 'app_commentaire_delete', methods: ['POST'])]
     #[IsGranted('COMMENTAIRE_DELETE', 'commentaire')]
     public function delete(

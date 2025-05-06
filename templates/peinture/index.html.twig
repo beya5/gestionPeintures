@@ -2,62 +2,98 @@
 
 {% block title %}Liste des peintures{% endblock %}
 
+{% block javascripts %}
+{{ parent() }}
+<script>
+function handleImageError(img) {
+    img.onerror = null;
+    img.src = "{{ asset('images/default.jpg') }}";
+    img.classList.add('object-fit-contain');
+    img.onerror = function() {
+        img.style.display = 'none';
+        const fallback = document.createElement('div');
+        fallback.className = 'h-100 w-100 d-flex justify-content-center align-items-center bg-light';
+        fallback.innerHTML = '<i class="bi bi-image text-muted fs-1"></i>';
+        img.parentNode.appendChild(fallback);
+    };
+}
+</script>
+{% endblock %}
+
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mb-4">Galerie des peintures</h1>
+    {# En-tête avec bouton retour vers l'accueil #}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Galerie des Peintures</h1>
+        <div>
+            <a href="{{ path('app_user_home') }}" class="btn btn-secondary me-2">
+                <i class="bi bi-house"></i> Accueil
+            </a>
+            <a href="{{ path('app_logout') }}" class="btn btn-outline-danger">
+                <i class="bi bi-box-arrow-right"></i> Déconnexion
+            </a>
+        </div>
+    </div>
+<div class="container mt-4">
+    
 
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_peinture_new') }}" class="btn btn-primary mb-4">
-        <i class="bi bi-plus-circle"></i> Ajouter une nouvelle peinture
+        <i class="bi bi-plus-circle me-2"></i> Ajouter une peinture
     </a>
+    {% endif %}
 
     <div class="row">
         {% for peinture in peintures %}
         <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                {# Affichage de l'image #}
-                <div class="card-img-top-container" style="height: 250px; overflow: hidden;">
-                    {% if peinture.imageUrl %}
-                        <img src="{{ peinture.imageUrl }}" 
-                             class="img-fluid w-100 h-100 object-fit-cover" 
+            <div class="card h-100 shadow-sm">
+                <div class="card-img-container" style="height: 250px; background: #f8f9fa;">
+                    {% if peinture.imageName %}
+                        <img src="{{ asset('images/peintures/' ~ peinture.imageName) }}" 
+                             class="img-fluid w-100 h-100 object-fit-cover"
                              alt="{{ peinture.nom }}"
-                             onerror="this.src='{{ asset('images/default-image.jpg') }}'">
+                             loading="lazy"
+                             onerror="handleImageError(this)">
                     {% else %}
-                        <div class="d-flex justify-content-center align-items-center h-100 bg-light">
+                        <div class="h-100 d-flex justify-content-center align-items-center">
                             <i class="bi bi-image text-muted fs-1"></i>
                         </div>
                     {% endif %}
                 </div>
 
-                <div class="card-body d-flex flex-column">
+                <div class="card-body">
                     <h5 class="card-title">{{ peinture.nom }}</h5>
                     
-                    <div class="mb-2">
-                        <span class="badge bg-secondary">
+                    <div class="d-flex flex-wrap gap-2 mb-2">
+                        <span class="badge bg-dark">
                             {{ peinture.dateRealisation ? peinture.dateRealisation|date('Y') : 'Sans date' }}
                         </span>
-                        <span class="badge bg-primary ms-2">
+                        <span class="badge bg-primary">
                             {{ peinture.largeur }}x{{ peinture.hauteur }} cm
                         </span>
                         {% if peinture.enVente %}
-                            <span class="badge bg-success ms-2">
-                                {{ peinture.prix|format_currency('EUR') }}
+                            <span class="badge bg-success">
+                                {{ peinture.prix|number_format(2, ',', ' ') }} TND
                             </span>
                         {% endif %}
                     </div>
 
-                    <p class="card-text flex-grow-1">
-                        {{ peinture.description|length > 100 ? peinture.description|slice(0, 100) ~ '...' : peinture.description }}
-                    </p>
+                    <div class="card-text text-muted mb-3">
+                        {{ peinture.description|striptags|u.truncate(100, '...') }}
+                    </div>
 
-                    <div class="d-flex justify-content-between mt-auto">
+                    <div class="d-flex justify-content-between align-items-center">
                         <a href="{{ path('app_peinture_show', {'id': peinture.id}) }}" 
                            class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-eye"></i> Voir
+                            <i class="bi bi-eye me-1"></i> Voir
                         </a>
+                        
+                        {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_peinture_edit', {'id': peinture.id}) }}" 
                            class="btn btn-sm btn-outline-warning">
-                            <i class="bi bi-pencil"></i> Éditer
+                            <i class="bi bi-pencil me-1"></i> Éditer
                         </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -65,7 +101,7 @@
         {% else %}
         <div class="col-12">
             <div class="alert alert-info text-center">
-                <i class="bi bi-info-circle"></i> Aucune peinture trouvée
+                <i class="bi bi-info-circle me-2"></i> Aucune peinture trouvée
             </div>
         </div>
         {% endfor %}
@@ -76,14 +112,30 @@
 {% block stylesheets %}
 <style>
     .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.1);
     }
     .card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
+    .card-img-container {
+        position: relative;
+        overflow: hidden;
+    }
+    .card-img-container img {
+        transition: transform 0.5s ease;
+    }
+    .card:hover .card-img-container img {
+        transform: scale(1.05);
+    }
     .object-fit-cover {
         object-fit: cover;
+        object-position: center;
+    }
+    .object-fit-contain {
+        object-fit: contain;
+        object-position: center;
     }
 </style>
 {% endblock %}

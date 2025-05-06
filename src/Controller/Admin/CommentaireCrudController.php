@@ -25,9 +25,9 @@ class CommentaireCrudController extends AbstractCrudController
             TextEditorField::new('contenu'), 
             DateTimeField::new('date')->setFormat('dd/MM/yyyy'),
             AssociationField::new('personne')
-            ->setFormTypeOption('choice_label', function ($personne) {
-            return $personne->getPrenom().' '.$personne->getNom();
-}),
+                ->setFormTypeOption('choice_label', function ($personne) {
+                    return $personne->getPrenom().' '.$personne->getNom();
+                }),
             AssociationField::new('peinture'), 
         ];
     }

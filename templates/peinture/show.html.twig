@@ -1,50 +1,137 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Peinture{% endblock %}
+{% block title %}{{ peinture.nom }}{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+function handleImageError(img) {
+    img.onerror = null;
+    img.src = "{{ asset('images/default.jpg') }}";
+    img.classList.add('object-fit-contain');
+    img.onerror = function() {
+        img.style.display = 'none';
+        const fallback = document.createElement('div');
+        fallback.className = 'h-100 w-100 d-flex justify-content-center align-items-center bg-light';
+        fallback.innerHTML = '<i class="bi bi-image text-muted fs-1"></i>';
+        img.parentNode.appendChild(fallback);
+    };
+}
+</script>
+{% endblock %}
 
 {% block body %}
-    <h1>Peinture</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-img-container" style="height: 500px; background: #f8f9fa;">
+                    {% if peinture.imageName %}
+                        <img src="{{ asset('images/peintures/' ~ peinture.imageName) }}" 
+                             class="h-100 w-100 object-fit-contain"
+                             alt="{{ peinture.nom }}"
+                             onerror="handleImageError(this)">
+                    {% else %}
+                        <div class="h-100 d-flex justify-content-center align-items-center">
+                            <i class="bi bi-image fs-1 text-muted"></i>
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="card-body">
+                    <h1 class="card-title">{{ peinture.nom }}</h1>
+                    
+                    <div class="mb-3">
+                        <span class="badge bg-secondary me-2">
+                            {{ peinture.dateRealisation|date('Y') }}
+                        </span>
+                        <span class="badge bg-primary me-2">
+                            {{ peinture.largeur }}x{{ peinture.hauteur }} cm
+                        </span>
+                        {% if peinture.enVente %}
+                        <span class="badge bg-success">
+                            {{ peinture.prix|number_format(2, ',', ' ') }} TND
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-4">
+                        {% for categorie in peinture.categories %}
+                        <span class="badge bg-info me-1">{{ categorie.designation }}</span>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="peinture-description">
+                        {{ peinture.description|raw }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Commentaires</h3>
+                </div>
+                <div class="card-body">
+                    {% if peinture.commentaires is not empty %}
+                        {% for commentaire in peinture.commentaires %}
+                        <div class="mb-3 pb-3 border-bottom">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <strong>{{ commentaire.nom }}</strong>
+                                <small class="text-muted">{{ commentaire.date|date('d/m/Y à H:i') }}</small>
+                            </div>
+                            <p class="mt-2 mb-0">{{ commentaire.contenu }}</p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">Aucun commentaire pour cette peinture</p>
+                    {% endif %}
+                    
+                    {% if is_granted('ROLE_USER') %}
+                    <div class="mt-4 pt-3 border-top">
+                        <h4 class="h5">Ajouter un commentaire</h4>
+                        {{ form_start(commentForm, {'attr': {'class': 'mt-3'}}) }}
+                            {{ form_widget(commentForm) }}
+                            <button class="btn btn-primary mt-3">Envoyer</button>
+                        {{ form_end(commentForm) }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a href="{{ path('app_peinture_index') }}" class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left me-2"></i> Retour à la liste
+        </a>
+        
+        {% if is_granted('ROLE_ADMIN') %}
+        <div>
+            <a href="{{ path('app_peinture_edit', {'id': peinture.id}) }}" class="btn btn-warning me-2">
+                <i class="bi bi-pencil me-2"></i> Modifier
+            </a>
+            {{ include('peinture/_delete_form.html.twig') }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ peinture.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ peinture.nom }}</td>
-            </tr>
-            <tr>
-                <th>Largeur</th>
-                <td>{{ peinture.largeur }}</td>
-            </tr>
-            <tr>
-                <th>Hauteur</th>
-                <td>{{ peinture.hauteur }}</td>
-            </tr>
-            <tr>
-                <th>En_vente</th>
-                <td>{{ peinture.enVente ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ peinture.prix }}</td>
-            </tr>
-            <tr>
-                <th>Date_realisation</th>
-                <td>{{ peinture.dateRealisation ? peinture.dateRealisation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ peinture.description }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_peinture_index') }}">back to list</a>
-
-    <a href="{{ path('app_peinture_edit', {'id': peinture.id}) }}">edit</a>
-
-    {{ include('peinture/_delete_form.html.twig') }}
+{% block stylesheets %}
+<style>
+    .peinture-description {
+        line-height: 1.6;
+    }
+    
+    .peinture-description img {
+        max-width: 100%;
+        height: auto;
+        margin: 1rem 0;
+    }
+    
+    .object-fit-contain {
+        object-fit: contain;
+        object-position: center;
+    }
+</style>
 {% endblock %}

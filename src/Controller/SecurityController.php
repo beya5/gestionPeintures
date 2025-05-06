@@ -19,7 +19,7 @@ public function login(AuthenticationUtils $authenticationUtils): Response
         if (in_array('ROLE_ADMIN', $user->getRoles())) {
             return $this->redirectToRoute('app_admin_dashboard');
         }
-        return $this->redirectToRoute('app_user_dashboard');
+        return $this->redirectToRoute('app_user_home');
     }
     $error = $authenticationUtils->getLastAuthenticationError();
     $lastUsername = $authenticationUtils->getLastUsername();

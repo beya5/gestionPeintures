@@ -20,28 +20,25 @@ class UserCrudController extends AbstractCrudController
     }
 
     public function configureFields(string $pageName): iterable
-    {
-        $fields = [
-            IdField::new('id')->onlyOnIndex(),
-            EmailField::new('eamillogin'),
-            TextField::new('cin'),
-            ChoiceField::new('roles')
-                ->setChoices([
-                    'Admin' => 'ROLE_ADMIN',
-                    'User' => 'ROLE_USER',
-                ])
-                ->allowMultipleChoices(), 
-            AssociationField::new('personne')
-                ->setFormTypeOption('choice_label', function ($personne) {
-                    return $personne->getPrenom().' '.$personne->getNom();
-                })
-        ];
-        if (in_array($pageName, ['new', 'edit'])) {
-            $fields[] = TextField::new('password')
-                ->setFormType(PasswordType::class)
-                ->onlyOnForms();
-        }
-
-        return $fields;
+{
+    $fields = [
+        IdField::new('id')->onlyOnIndex(),
+        EmailField::new('eamillogin'),
+        TextField::new('cin'),
+        ChoiceField::new('roles')
+            ->setChoices([
+                'Admin' => 'ROLE_ADMIN',
+                'User' => 'ROLE_USER',
+            ])
+            ->allowMultipleChoices(),
+    ];
+    
+    if (in_array($pageName, ['new', 'edit'])) {
+        $fields[] = TextField::new('password')
+            ->setFormType(PasswordType::class)
+            ->onlyOnForms();
     }
+
+    return $fields;
+}
 }
