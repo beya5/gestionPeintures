@@ -4,4 +4,58 @@
 {% block content %}
     <h1>Bienvenue dans le back-office</h1>
     <p>Utilisez le menu à gauche pour gérer les entités.</p>
+
+    <h2>Statistiques</h2>
+    <ul>
+        <li><strong>Peintures :</strong> {{ peintureCount }}</li>
+        <li><strong>Personnes :</strong> {{ personneCount }}</li>
+        <li><strong>Catégories :</strong> {{ categorieCount }}</li>
+        <li><strong>Commentaires :</strong> {{ commentaireCount }}</li>
+        <li><strong>Utilisateurs :</strong> {{ userCount }}</li>
+    </ul>
+
+    <canvas id="statsChart" width="600" height="300"></canvas>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('statsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Peintures', 'Personnes', 'Catégories', 'Commentaires', 'Utilisateurs'],
+                datasets: [{
+                    label: 'Nombre',
+                    data: [
+                        {{ peintureCount }},
+                        {{ personneCount }},
+                        {{ categorieCount }},
+                        {{ commentaireCount }},
+                        {{ userCount }}
+                    ],
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)',
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)'
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
 {% endblock %}
