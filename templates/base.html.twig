@@ -3,15 +3,31 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" href="/path/to/favicon.svg">
         {% block stylesheets %}
-        {% endblock %}
+            <style>
+                .custom-input {
+                    border-radius: 12px;
+                    padding: 12px;
+                    border: 1px solid #ced4da;
+                    transition: all 0.3s ease-in-out;
+                }
 
+                .custom-input:focus {
+                    border-color: #0d6efd;
+                    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+                }
+            </style>
+        {% endblock %}
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% if importmap is defined %}
+                {% block importmap %}{{ importmap('app') }}{% endblock %}
+            {% else %}
+                <!-- ImportMap is not configured -->
+            {% endif %}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}{# Content goes here in child templates #}{% endblock %}
     </body>
 </html>
