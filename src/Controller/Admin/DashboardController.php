@@ -18,7 +18,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+#[Route('/admin')]
 class DashboardController extends AbstractDashboardController
 {
     private AdminUrlGenerator $adminUrlGenerator;
@@ -38,7 +39,7 @@ class DashboardController extends AbstractDashboardController
         $this->userRepository = $userRepository;
     }
 
-    #[Route('/admin/dashboard', name: 'app_admin_dashboard')]
+    #[Route('/dashboard', name: 'app_admin_dashboard')]
     #[IsGranted('ROLE_ADMIN')]
     public function adminDashboard(): Response
     {

@@ -2,13 +2,20 @@
 
 namespace App\Controller\Admin;
 
+
 use App\Entity\Peinture;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+
 
 class PeintureCrudController extends AbstractCrudController
 {
@@ -30,15 +37,19 @@ class PeintureCrudController extends AbstractCrudController
                 ->renderAsNativeWidget(),
             TextEditorField::new('description'),
             AssociationField::new('categories')
-            ->setFormTypeOption('choice_label', 'designation') 
-            ->formatValue(function ($value, $entity) {
-                return implode(', ', $entity->getCategories()->map(fn($c) => $c->getDesignation())->toArray());
-            }),
-            UrlField::new('imageUrl', 'URL de l\'image')
-            ->hideOnIndex(),
-        ImageField::new('imageUrl', 'Image')
-            ->setBasePath('') 
-            ->onlyOnIndex()
-        ];
+                ->setFormTypeOption('choice_label', 'designation')
+                ->formatValue(function ($value, $entity) {
+                    return implode(', ', $entity->getCategories()->map(fn($c) => $c->getDesignation())->toArray());
+                }),
+            BooleanField::new('en_vente', 'En vente'),
+           
+            ImageField::new('imageName', 'Image')
+            ->setBasePath('images/peintures')
+            ->onlyOnIndex(),
+
+        Field::new('imageFile')
+            ->setFormType(VichImageType::class)
+            ->onlyOnForms(),
+            ];
     }
 }

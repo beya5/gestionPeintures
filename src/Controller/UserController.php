@@ -18,13 +18,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_USER')]
 #[Route('/user')]
 final class UserController extends AbstractController{
-    #[Route('/dashboard', name: 'app_user_dashboard')]
-    public function dashboard(PeintureRepository $peintureRepository): Response
-    {
-        return $this->render('user/dashboard.html.twig', [
-            'peintures' => $peintureRepository->findAllVisible(),
-        ]);
-    }
+    
+    #[Route('/home', name: 'app_user_home')]
+public function home(): Response
+{
+    return $this->render('user/home.html.twig');
+}
+
 
     #[Route('/commentaires', name: 'app_user_commentaires')]
     public function commentaires(CommentaireRepository $commentaireRepository): Response
@@ -79,4 +79,11 @@ final class UserController extends AbstractController{
 
         return $this->redirectToRoute('app_user_commentaires');
     }
+    #[Route('/logout', name: 'app_logout')]
+public function logout(): void
+{
+ 
+    throw new \Exception('Logout should be handled by Symfony.');
+}
+
 }

@@ -6,8 +6,13 @@ use App\Repository\PeintureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
+#[Vich\Uploadable] 
 #[ORM\Entity(repositoryClass: PeintureRepository::class)]
 class Peinture
 {
@@ -49,12 +54,32 @@ class Peinture
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'peintures')]
     private Collection $categories;
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageUrl = null;
+    private ?string $imageName = null;
+  
+    #[Vich\UploadableField(mapping: 'peinture_image', fileNameProperty: 'imageName')]
+    private $imageFile;
+
+
+    public function getImagePath(): string
+    {
+        return $this->imageName ? 'uploads/peintures/'.$this->imageName : 'images/default.jpg';
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
 
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->en_vente = false;
     }
     public function __toString(): string
     {
@@ -148,14 +173,14 @@ class Peinture
 
         return $this;
     }
-    public function getImageUrl(): ?string
+    public function getImageName(): ?string
     {
-        return $this->imageUrl;
+        return $this->imageName;
     }
 
-    public function setImageUrl(?string $imageUrl): static
+    public function setImageName(?string $imageName): static
     {
-        $this->imageUrl = $imageUrl;
+        $this->imageUrl = $imageName;
 
         return $this;
     }

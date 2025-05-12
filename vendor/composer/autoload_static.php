@@ -39,9 +39,14 @@ class ComposerStaticInit74ab73114a599f4a2997b6a284f9e273
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'Vich\\UploaderBundle\\' => 20,
+        ),
         'T' => 
         array (
             'Twig\\Extra\\TwigExtraBundle\\' => 27,
+            'Twig\\Extra\\String\\' => 18,
             'Twig\\Extra\\Html\\' => 16,
             'Twig\\' => 5,
         ),
@@ -50,6 +55,7 @@ class ComposerStaticInit74ab73114a599f4a2997b6a284f9e273
             'Symfony\\UX\\TwigComponent\\' => 25,
             'Symfony\\UX\\Turbo\\' => 17,
             'Symfony\\UX\\StimulusBundle\\' => 26,
+            'Symfony\\UX\\LazyImage\\' => 21,
             'Symfony\\Runtime\\Symfony\\Component\\' => 34,
             'Symfony\\Polyfill\\Uuid\\' => 22,
             'Symfony\\Polyfill\\Php84\\' => 23,
@@ -138,7 +144,16 @@ class ComposerStaticInit74ab73114a599f4a2997b6a284f9e273
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Metadata\\' => 9,
             'Masterminds\\' => 12,
+        ),
+        'L' => 
+        array (
+            'Liip\\ImagineBundle\\' => 19,
+        ),
+        'I' => 
+        array (
+            'Imagine\\' => 8,
         ),
         'E' => 
         array (
@@ -187,9 +202,17 @@ class ComposerStaticInit74ab73114a599f4a2997b6a284f9e273
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
         ),
+        'Vich\\UploaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vich/uploader-bundle/src',
+        ),
         'Twig\\Extra\\TwigExtraBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/extra-bundle',
+        ),
+        'Twig\\Extra\\String\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/string-extra',
         ),
         'Twig\\Extra\\Html\\' => 
         array (
@@ -210,6 +233,10 @@ class ComposerStaticInit74ab73114a599f4a2997b6a284f9e273
         'Symfony\\UX\\StimulusBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/stimulus-bundle/src',
+        ),
+        'Symfony\\UX\\LazyImage\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/ux-lazy-image/src',
         ),
         'Symfony\\Runtime\\Symfony\\Component\\' => 
         array (
@@ -539,9 +566,21 @@ class ComposerStaticInit74ab73114a599f4a2997b6a284f9e273
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
+        ),
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'Liip\\ImagineBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liip/imagine-bundle',
+        ),
+        'Imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagine/imagine/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (
