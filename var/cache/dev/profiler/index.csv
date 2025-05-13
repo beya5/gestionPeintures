@@ -47,3 +47,7 @@ fa42fd,::1,GET,http://localhost:8000/.well-known/appspecific/com.chrome.devtools
 26a892,::1,GET,http://localhost:8000/login,1747086891,,200,request
 fd206d,::1,GET,http://localhost:8000/login,1747086910,,200,request
 76b409,::1,GET,http://localhost:8000/login,1747086938,,200,request
+de67e5,::1,GET,http://localhost:8000/admin/dashboard,1747099491,e7388e,500,request
+e7388e,::1,GET,http://localhost:8000/admin/dashboard,1747099491,,500,request
+d75cfb,::1,GET,http://localhost:8000/admin/peinture,1747099600,f96cb8,500,request
+f96cb8,::1,GET,http://localhost:8000/admin/peinture,1747099600,,500,request

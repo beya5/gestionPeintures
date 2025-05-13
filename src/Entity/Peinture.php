@@ -54,27 +54,16 @@ class Peinture
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'peintures')]
     private Collection $categories;
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $imageName = null;
+private ?string $imageUrl = null;
+
   
-    #[Vich\UploadableField(mapping: 'peinture_image', fileNameProperty: 'imageName')]
-    private $imageFile;
+   
 
 
     public function getImagePath(): string
     {
         return $this->imageName ? 'uploads/peintures/'.$this->imageName : 'images/default.jpg';
     }
-
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -173,17 +162,17 @@ class Peinture
 
         return $this;
     }
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
+    public function getImageUrl(): ?string
+{
+    return $this->imageUrl;
+}
 
-    public function setImageName(?string $imageName): static
-    {
-        $this->imageUrl = $imageName;
+public function setImageUrl(?string $imageUrl): static
+{
+    $this->imageUrl = $imageUrl;
+    return $this;
+}
 
-        return $this;
-    }
 
     /**
      * @return Collection<int, Commentaire>
