@@ -1,0 +1,59 @@
+<?php //easyadmin.routes.fqcn_to_route
+
+return [PHP_INT_MAX, [
+    'App\\Controller\\Admin\\DashboardController' => [
+        '' => [
+            '' => null,
+        ],
+        'App\\Controller\\Admin\\CategorieCrudController' => [
+            'index' => '_categorie_index',
+            'new' => '_categorie_new',
+            'batchDelete' => '_categorie_batch_delete',
+            'autocomplete' => '_categorie_autocomplete',
+            'renderFilters' => '_categorie_render_filters',
+            'edit' => '_categorie_edit',
+            'delete' => '_categorie_delete',
+            'detail' => '_categorie_detail',
+        ],
+        'App\\Controller\\Admin\\CommentaireCrudController' => [
+            'index' => '_commentaire_index',
+            'new' => '_commentaire_new',
+            'batchDelete' => '_commentaire_batch_delete',
+            'autocomplete' => '_commentaire_autocomplete',
+            'renderFilters' => '_commentaire_render_filters',
+            'edit' => '_commentaire_edit',
+            'delete' => '_commentaire_delete',
+            'detail' => '_commentaire_detail',
+        ],
+        'App\\Controller\\Admin\\PeintureCrudController' => [
+            'index' => '_peinture_index',
+            'new' => '_peinture_new',
+            'batchDelete' => '_peinture_batch_delete',
+            'autocomplete' => '_peinture_autocomplete',
+            'renderFilters' => '_peinture_render_filters',
+            'edit' => '_peinture_edit',
+            'delete' => '_peinture_delete',
+            'detail' => '_peinture_detail',
+        ],
+        'App\\Controller\\Admin\\PersonneCrudController' => [
+            'index' => '_personne_index',
+            'new' => '_personne_new',
+            'batchDelete' => '_personne_batch_delete',
+            'autocomplete' => '_personne_autocomplete',
+            'renderFilters' => '_personne_render_filters',
+            'edit' => '_personne_edit',
+            'delete' => '_personne_delete',
+            'detail' => '_personne_detail',
+        ],
+        'App\\Controller\\Admin\\UserCrudController' => [
+            'index' => '_user_index',
+            'new' => '_user_new',
+            'batchDelete' => '_user_batch_delete',
+            'autocomplete' => '_user_autocomplete',
+            'renderFilters' => '_user_render_filters',
+            'edit' => '_user_edit',
+            'delete' => '_user_delete',
+            'detail' => '_user_detail',
+        ],
+    ],
+]];

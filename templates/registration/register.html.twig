@@ -1,57 +1,64 @@
-<div class="container mt-4">
-    <h1>Register</h1>
+{% extends 'base.html.twig' %}
 
-    {{ form_start(registrationForm) }}
-        <div class="mb-3">
-            {{ form_row(registrationForm.eamillogin, {
-                'attr': {'class': 'form-control'}
-            }) }}
+{% block body %}
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg border-0" style="max-width: 600px; width: 100%; border-radius: 10px; background-color: #e6f4ea; padding: 30px;">
+        <h2 class="text-center mb-2 text-primary fw-bold" style="font-size: 2.5rem;">Créer un compte</h2>
+
+        {{ form_start(registrationForm) }}
+
+        <div class="mb-4">
+            <label class="form-label fw-semibold">Adresse Email</label>
+            {{ form_widget(registrationForm.eamillogin, {'attr': {'class': 'form-control custom-input'}}) }}
         </div>
-        
-        <div class="mb-3">
-            {{ form_row(registrationForm.plainPassword, {
-                'attr': {'class': 'form-control'}
-            }) }}
+
+        <div class="mb-4">
+            <label class="form-label fw-semibold">Mot de passe</label>
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control custom-input'}}) }}
         </div>
-        
-        <div class="mb-3 form-check">
-            {{ form_row(registrationForm.agreeTerms, {
-                'attr': {'class': 'form-check-input'}
-            }) }}
+
+        <div class="mb-4 form-check">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            <label class="form-check-label ms-2">Accepter les conditions</label>
         </div>
-        
-        <h3 class="mt-4">Personal Information</h3>
-        
+
+        <h4 class="mt-5 mb-3 text-secondary">Informations personnelles</h4>
+
         <div class="row">
             <div class="col-md-6 mb-3">
                 {{ form_row(registrationForm.cin, {
-                    'attr': {'class': 'form-control'},
+                    'attr': {'class': 'form-control custom-input'},
                     'label': 'CIN'
                 }) }}
             </div>
             <div class="col-md-6 mb-3">
                 {{ form_row(registrationForm.tel, {
-                    'attr': {'class': 'form-control'},
-                    'label': 'Phone Number'
-                }) }}
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                {{ form_row(registrationForm.nom, {
-                    'attr': {'class': 'form-control'},
-                    'label': 'Last Name'
-                }) }}
-            </div>
-            <div class="col-md-6 mb-3">
-                {{ form_row(registrationForm.prenom, {
-                    'attr': {'class': 'form-control'},
-                    'label': 'First Name'
+                    'attr': {'class': 'form-control custom-input'},
+                    'label': 'Téléphone'
                 }) }}
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
-    {{ form_end(registrationForm) }}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_row(registrationForm.nom, {
+                    'attr': {'class': 'form-control custom-input'},
+                    'label': 'Nom'
+                }) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_row(registrationForm.prenom, {
+                    'attr': {'class': 'form-control custom-input'},
+                    'label': 'Prénom'
+                }) }}
+            </div>
+        </div>
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-success btn-lg shadow-sm custom-input">S'inscrire</button>
+        </div>
+
+        {{ form_end(registrationForm) }}
+    </div>
 </div>
+{% endblock %}

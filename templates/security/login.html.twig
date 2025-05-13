@@ -3,32 +3,39 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<h1>Connexion</h1>
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg border-0" style="width: 100%; max-width: 600px; background-color: #e6f4ea; border-radius: 10px; padding: 30px; font-size: 1.1rem;">
+        <h2 class="text-center mb-4 text-success fw-bold" style="font-size: 2.5rem;">Connexion</h2>
 
-{% if error %}
-    <div class="alert alert-danger">
-        {{ error.messageKey|trans(error.messageData, 'security') }}
-    </div>
-{% endif %}
+        {% if error %}
+            <div class="alert alert-danger">
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
 
-<form action="{{ path('app_login') }}" method="post">
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}">
-    <div>
-        <label for="eamillogin">Email</label>
-        <input type="text" id="eamillogin" name="eamillogin" value="{{ last_username }}" required autofocus>
-    </div>
+        <form action="{{ path('app_login') }}" method="post">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-    <div>
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" required>
-    </div>
+            <div class="mb-4">
+                <label for="eamillogin" class="form-label fw-semibold" style="font-size: 1.2rem;">Email</label>
+                <input type="text" id="eamillogin" name="eamillogin" value="{{ last_username }}" required autofocus class="form-control custom-input">
+            </div>
 
-    <div>
-        <button type="submit">Se connecter</button>
+            <div class="mb-4">
+                <label for="password" class="form-label fw-semibold" style="font-size: 1.2rem;">Mot de passe</label>
+                <input type="password" id="password" name="password" required class="form-control custom-input">
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-success btn-lg shadow-sm" style="border-radius: 8px; font-size: 1.1rem;">
+                    Se connecter
+                </button>
+            </div>
+
+            <div class="text-center">
+                <p>Pas encore inscrit ? <a href="{{ path('app_register') }}" class="text-decoration-none text-success fw-semibold" style="font-size: 1.2rem;">S'inscrire</a></p>
+            </div>
+        </form>
     </div>
-    <div>
-        <p><a href="{{ path('app_register') }}> S'inscrire</a></p>
-    </div>
-</form>
+</div>
 {% endblock %}
