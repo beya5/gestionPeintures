@@ -35,15 +35,15 @@ class PeintureController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('imageFile')->getData();
-            
-            if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('kernel.project_dir').'/public/images/peintures',
-                    $newFilename
-                );
-                $peinture->setImageName($newFilename);
-            }
+if ($imageFile) {
+    $newFilename = uniqid().'.'.$imageFile->guessExtension();
+    $imageFile->move(
+        $this->getParameter('kernel.project_dir').'/public/images/peintures',
+        $newFilename
+    );
+    $peinture->setImageUrl('/images/peintures/' . $newFilename);
+}
+
 
             $em->persist($peinture);
             $em->flush();

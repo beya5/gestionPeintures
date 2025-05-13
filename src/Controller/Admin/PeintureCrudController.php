@@ -43,13 +43,12 @@ class PeintureCrudController extends AbstractCrudController
                 }),
             BooleanField::new('en_vente', 'En vente'),
            
-            ImageField::new('imageName', 'Image')
-            ->setBasePath('images/peintures')
-            ->onlyOnIndex(),
+            TextField::new('imageUrl', 'Image URL')->onlyOnForms(),
 
-        Field::new('imageFile')
-            ->setFormType(VichImageType::class)
-            ->onlyOnForms(),
+ImageField::new('imageUrl', 'Aperçu')
+    ->setBasePath('/')
+    ->onlyOnIndex(),
+
             ];
     }
 }

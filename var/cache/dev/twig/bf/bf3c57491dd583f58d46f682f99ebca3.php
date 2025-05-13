@@ -37,7 +37,7 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
 
     protected function doGetParent(array $context): bool|string|Template|TemplateWrapper
     {
-        // line 2
+        // line 1
         return "@EasyAdmin/page/content.html.twig";
     }
 
@@ -50,7 +50,7 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "template", "admin/dashboard.html.twig"));
 
-        $this->parent = $this->loadTemplate("@EasyAdmin/page/content.html.twig", "admin/dashboard.html.twig", 2);
+        $this->parent = $this->loadTemplate("@EasyAdmin/page/content.html.twig", "admin/dashboard.html.twig", 1);
         yield from $this->parent->unwrap()->yield($context, array_merge($this->blocks, $blocks));
         
         $__internal_5a27a8ba21ca79b61932376b2fa922d2->leave($__internal_5a27a8ba21ca79b61932376b2fa922d2_prof);
@@ -60,7 +60,7 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
 
     }
 
-    // line 4
+    // line 3
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -73,35 +73,59 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "content"));
 
-        // line 5
-        yield "    <h1>Bienvenue dans le back-office</h1>
-    <p>Utilisez le menu à gauche pour gérer les entités.</p>
+        // line 4
+        yield "<div class=\"container\">
+    <h1 class=\"mb-4\">Bienvenue dans le back-office</h1>
+    <p class=\"text-muted\">Utilisez le menu à gauche pour gérer les entités.</p>
 
-    <h2>Statistiques</h2>
-    <ul>
-        <li><strong>Peintures :</strong> ";
-        // line 10
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["peintureCount"]) || array_key_exists("peintureCount", $context) ? $context["peintureCount"] : (function () { throw new RuntimeError('Variable "peintureCount" does not exist.', 10, $this->source); })()), "html", null, true);
-        yield "</li>
-        <li><strong>Personnes :</strong> ";
-        // line 11
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["personneCount"]) || array_key_exists("personneCount", $context) ? $context["personneCount"] : (function () { throw new RuntimeError('Variable "personneCount" does not exist.', 11, $this->source); })()), "html", null, true);
-        yield "</li>
-        <li><strong>Catégories :</strong> ";
-        // line 12
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["categorieCount"]) || array_key_exists("categorieCount", $context) ? $context["categorieCount"] : (function () { throw new RuntimeError('Variable "categorieCount" does not exist.', 12, $this->source); })()), "html", null, true);
-        yield "</li>
-        <li><strong>Commentaires :</strong> ";
-        // line 13
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["commentaireCount"]) || array_key_exists("commentaireCount", $context) ? $context["commentaireCount"] : (function () { throw new RuntimeError('Variable "commentaireCount" does not exist.', 13, $this->source); })()), "html", null, true);
-        yield "</li>
-        <li><strong>Utilisateurs :</strong> ";
+    <div class=\"row mt-5\">
+        <div class=\"col-md-6\">
+            <h2 class=\"h4\">Statistiques</h2>
+            <ul class=\"list-group\">
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Peintures
+                    <span class=\"badge bg-primary rounded-pill\">";
         // line 14
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["userCount"]) || array_key_exists("userCount", $context) ? $context["userCount"] : (function () { throw new RuntimeError('Variable "userCount" does not exist.', 14, $this->source); })()), "html", null, true);
-        yield "</li>
-    </ul>
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["peinturesCount"]) || array_key_exists("peinturesCount", $context) ? $context["peinturesCount"] : (function () { throw new RuntimeError('Variable "peinturesCount" does not exist.', 14, $this->source); })()), "html", null, true);
+        yield "</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Personnes
+                    <span class=\"badge bg-secondary rounded-pill\">";
+        // line 18
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["personnesCount"]) || array_key_exists("personnesCount", $context) ? $context["personnesCount"] : (function () { throw new RuntimeError('Variable "personnesCount" does not exist.', 18, $this->source); })()), "html", null, true);
+        yield "</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Catégories
+                    <span class=\"badge bg-success rounded-pill\">";
+        // line 22
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["categoriesCount"]) || array_key_exists("categoriesCount", $context) ? $context["categoriesCount"] : (function () { throw new RuntimeError('Variable "categoriesCount" does not exist.', 22, $this->source); })()), "html", null, true);
+        yield "</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Commentaires
+                    <span class=\"badge bg-warning text-dark rounded-pill\">";
+        // line 26
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["commentairesCount"]) || array_key_exists("commentairesCount", $context) ? $context["commentairesCount"] : (function () { throw new RuntimeError('Variable "commentairesCount" does not exist.', 26, $this->source); })()), "html", null, true);
+        yield "</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Utilisateurs
+                    <span class=\"badge bg-info text-dark rounded-pill\">";
+        // line 30
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["usersCount"]) || array_key_exists("usersCount", $context) ? $context["usersCount"] : (function () { throw new RuntimeError('Variable "usersCount" does not exist.', 30, $this->source); })()), "html", null, true);
+        yield "</span>
+                </li>
+            </ul>
+        </div>
 
-    <canvas id=\"statsChart\" width=\"600\" height=\"300\"></canvas>
+        <div class=\"col-md-6\">
+            <h2 class=\"h4\">Graphique</h2>
+            <canvas id=\"statsChart\" width=\"100%\" height=\"300\"></canvas>
+        </div>
+    </div>
+</div>
 ";
         
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->leave($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof);
@@ -112,7 +136,7 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
         yield from [];
     }
 
-    // line 20
+    // line 43
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -125,7 +149,7 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 21
+        // line 44
         yield "    <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
     <script>
         const ctx = document.getElementById('statsChart').getContext('2d');
@@ -137,24 +161,24 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
                     label: 'Nombre',
                     data: [
                         ";
-        // line 31
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["peintureCount"]) || array_key_exists("peintureCount", $context) ? $context["peintureCount"] : (function () { throw new RuntimeError('Variable "peintureCount" does not exist.', 31, $this->source); })()), "html", null, true);
+        // line 54
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["peinturesCount"]) || array_key_exists("peinturesCount", $context) ? $context["peinturesCount"] : (function () { throw new RuntimeError('Variable "peinturesCount" does not exist.', 54, $this->source); })()), "html", null, true);
         yield ",
                         ";
-        // line 32
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["personneCount"]) || array_key_exists("personneCount", $context) ? $context["personneCount"] : (function () { throw new RuntimeError('Variable "personneCount" does not exist.', 32, $this->source); })()), "html", null, true);
+        // line 55
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["personnesCount"]) || array_key_exists("personnesCount", $context) ? $context["personnesCount"] : (function () { throw new RuntimeError('Variable "personnesCount" does not exist.', 55, $this->source); })()), "html", null, true);
         yield ",
                         ";
-        // line 33
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["categorieCount"]) || array_key_exists("categorieCount", $context) ? $context["categorieCount"] : (function () { throw new RuntimeError('Variable "categorieCount" does not exist.', 33, $this->source); })()), "html", null, true);
+        // line 56
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["categoriesCount"]) || array_key_exists("categoriesCount", $context) ? $context["categoriesCount"] : (function () { throw new RuntimeError('Variable "categoriesCount" does not exist.', 56, $this->source); })()), "html", null, true);
         yield ",
                         ";
-        // line 34
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["commentaireCount"]) || array_key_exists("commentaireCount", $context) ? $context["commentaireCount"] : (function () { throw new RuntimeError('Variable "commentaireCount" does not exist.', 34, $this->source); })()), "html", null, true);
+        // line 57
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["commentairesCount"]) || array_key_exists("commentairesCount", $context) ? $context["commentairesCount"] : (function () { throw new RuntimeError('Variable "commentairesCount" does not exist.', 57, $this->source); })()), "html", null, true);
         yield ",
                         ";
-        // line 35
-        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["userCount"]) || array_key_exists("userCount", $context) ? $context["userCount"] : (function () { throw new RuntimeError('Variable "userCount" does not exist.', 35, $this->source); })()), "html", null, true);
+        // line 58
+        yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape((isset($context["usersCount"]) || array_key_exists("usersCount", $context) ? $context["usersCount"] : (function () { throw new RuntimeError('Variable "usersCount" does not exist.', 58, $this->source); })()), "html", null, true);
         yield "
                     ],
                     backgroundColor: [
@@ -175,11 +199,20 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
-                    y: { beginAtZero: true }
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision:0
+                        }
+                    }
                 }
             }
         });
+        <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+
     </script>
 ";
         
@@ -212,28 +245,51 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
      */
     public function getDebugInfo(): array
     {
-        return array (  157 => 35,  153 => 34,  149 => 33,  145 => 32,  141 => 31,  129 => 21,  116 => 20,  100 => 14,  96 => 13,  92 => 12,  88 => 11,  84 => 10,  77 => 5,  64 => 4,  41 => 2,);
+        return array (  181 => 58,  177 => 57,  173 => 56,  169 => 55,  165 => 54,  153 => 44,  140 => 43,  117 => 30,  110 => 26,  103 => 22,  96 => 18,  89 => 14,  77 => 4,  64 => 3,  41 => 1,);
     }
 
     public function getSourceContext(): Source
     {
-        return new Source("{# templates/admin/dashboard.html.twig #}
-{% extends '@EasyAdmin/page/content.html.twig' %}
+        return new Source("{% extends '@EasyAdmin/page/content.html.twig' %}
 
 {% block content %}
-    <h1>Bienvenue dans le back-office</h1>
-    <p>Utilisez le menu à gauche pour gérer les entités.</p>
+<div class=\"container\">
+    <h1 class=\"mb-4\">Bienvenue dans le back-office</h1>
+    <p class=\"text-muted\">Utilisez le menu à gauche pour gérer les entités.</p>
 
-    <h2>Statistiques</h2>
-    <ul>
-        <li><strong>Peintures :</strong> {{ peintureCount }}</li>
-        <li><strong>Personnes :</strong> {{ personneCount }}</li>
-        <li><strong>Catégories :</strong> {{ categorieCount }}</li>
-        <li><strong>Commentaires :</strong> {{ commentaireCount }}</li>
-        <li><strong>Utilisateurs :</strong> {{ userCount }}</li>
-    </ul>
+    <div class=\"row mt-5\">
+        <div class=\"col-md-6\">
+            <h2 class=\"h4\">Statistiques</h2>
+            <ul class=\"list-group\">
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Peintures
+                    <span class=\"badge bg-primary rounded-pill\">{{ peinturesCount }}</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Personnes
+                    <span class=\"badge bg-secondary rounded-pill\">{{ personnesCount }}</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Catégories
+                    <span class=\"badge bg-success rounded-pill\">{{ categoriesCount }}</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Commentaires
+                    <span class=\"badge bg-warning text-dark rounded-pill\">{{ commentairesCount }}</span>
+                </li>
+                <li class=\"list-group-item d-flex justify-content-between align-items-center\">
+                    Utilisateurs
+                    <span class=\"badge bg-info text-dark rounded-pill\">{{ usersCount }}</span>
+                </li>
+            </ul>
+        </div>
 
-    <canvas id=\"statsChart\" width=\"600\" height=\"300\"></canvas>
+        <div class=\"col-md-6\">
+            <h2 class=\"h4\">Graphique</h2>
+            <canvas id=\"statsChart\" width=\"100%\" height=\"300\"></canvas>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block javascripts %}
@@ -247,11 +303,11 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
                 datasets: [{
                     label: 'Nombre',
                     data: [
-                        {{ peintureCount }},
-                        {{ personneCount }},
-                        {{ categorieCount }},
-                        {{ commentaireCount }},
-                        {{ userCount }}
+                        {{ peinturesCount }},
+                        {{ personnesCount }},
+                        {{ categoriesCount }},
+                        {{ commentairesCount }},
+                        {{ usersCount }}
                     ],
                     backgroundColor: [
                         'rgba(75, 192, 192, 0.6)',
@@ -271,12 +327,22 @@ class __TwigTemplate_5099355b1a30a7d2a4dfd2bfbca7bbae extends Template
                 }]
             },
             options: {
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
-                    y: { beginAtZero: true }
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision:0
+                        }
+                    }
                 }
             }
         });
+        <script src=\"https://cdn.jsdelivr.net/npm/chart.js\"></script>
+
     </script>
-{% endblock %}", "admin/dashboard.html.twig", "C:\\Users\\PC NOURHEN\\Documents\\peinture\\gestionPeintures\\templates\\admin\\dashboard.html.twig");
+{% endblock %}
+", "admin/dashboard.html.twig", "C:\\Users\\PC NOURHEN\\Documents\\peinture\\gestionPeintures\\templates\\admin\\dashboard.html.twig");
     }
 }

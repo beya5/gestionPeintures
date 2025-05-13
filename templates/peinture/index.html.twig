@@ -48,12 +48,10 @@ function handleImageError(img) {
         <div class="col-md-4 mb-4">
             <div class="card h-100 shadow-sm">
                 <div class="card-img-container" style="height: 250px; background: #f8f9fa;">
-                    {% if peinture.imageName %}
-                        <img src="{{ asset('images/peintures/' ~ peinture.imageName) }}" 
-                             class="img-fluid w-100 h-100 object-fit-cover"
-                             alt="{{ peinture.nom }}"
-                             loading="lazy"
-                             onerror="handleImageError(this)">
+                    {% if peinture.imageUrl %}
+                        <img src="{{peinture.imageUrl}}" 
+                             class="h-100 w-100 object-fit-contain"
+                             alt="{{ peinture.nom }}">
                     {% else %}
                         <div class="h-100 d-flex justify-content-center align-items-center">
                             <i class="bi bi-image text-muted fs-1"></i>

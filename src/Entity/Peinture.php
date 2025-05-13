@@ -6,13 +6,9 @@ use App\Repository\PeintureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
-use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Doctrine\ORM\Mapping as ORM;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[Vich\Uploadable] 
 #[ORM\Entity(repositoryClass: PeintureRepository::class)]
 class Peinture
 {
@@ -42,6 +38,9 @@ class Peinture
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageUrl = null;
+
     /**
      * @var Collection<int, Commentaire>
      */
@@ -53,27 +52,19 @@ class Peinture
      */
     #[ORM\ManyToMany(targetEntity: Categorie::class, inversedBy: 'peintures')]
     private Collection $categories;
-    #[ORM\Column(length: 255, nullable: true)]
-private ?string $imageUrl = null;
 
-  
-   
-
-
-    public function getImagePath(): string
-    {
-        return $this->imageName ? 'uploads/peintures/'.$this->imageName : 'images/default.jpg';
-    }
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->en_vente = false;
     }
+
     public function __toString(): string
     {
-    return $this->nom ?? ''; 
+        return $this->nom ?? '';
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,7 +78,6 @@ private ?string $imageUrl = null;
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
         return $this;
     }
 
@@ -99,7 +89,6 @@ private ?string $imageUrl = null;
     public function setLargeur(string $largeur): static
     {
         $this->largeur = $largeur;
-
         return $this;
     }
 
@@ -111,7 +100,6 @@ private ?string $imageUrl = null;
     public function setHauteur(string $hauteur): static
     {
         $this->hauteur = $hauteur;
-
         return $this;
     }
 
@@ -123,7 +111,6 @@ private ?string $imageUrl = null;
     public function setEnVente(bool $en_vente): static
     {
         $this->en_vente = $en_vente;
-
         return $this;
     }
 
@@ -135,7 +122,6 @@ private ?string $imageUrl = null;
     public function setPrix(string $prix): static
     {
         $this->prix = $prix;
-
         return $this;
     }
 
@@ -147,7 +133,6 @@ private ?string $imageUrl = null;
     public function setDateRealisation(\DateTimeInterface $date_realisation): static
     {
         $this->date_realisation = $date_realisation;
-
         return $this;
     }
 
@@ -159,20 +144,19 @@ private ?string $imageUrl = null;
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
+
     public function getImageUrl(): ?string
-{
-    return $this->imageUrl;
-}
+    {
+        return $this->imageUrl;
+    }
 
-public function setImageUrl(?string $imageUrl): static
-{
-    $this->imageUrl = $imageUrl;
-    return $this;
-}
-
+    public function setImageUrl(?string $imageUrl): static
+    {
+        $this->imageUrl = $imageUrl;
+        return $this;
+    }
 
     /**
      * @return Collection<int, Commentaire>
@@ -188,19 +172,16 @@ public function setImageUrl(?string $imageUrl): static
             $this->commentaires->add($commentaire);
             $commentaire->setPeinture($this);
         }
-
         return $this;
     }
 
     public function removeCommentaire(Commentaire $commentaire): static
     {
         if ($this->commentaires->removeElement($commentaire)) {
-            // set the owning side to null (unless already changed)
             if ($commentaire->getPeinture() === $this) {
                 $commentaire->setPeinture(null);
             }
         }
-
         return $this;
     }
 
@@ -217,14 +198,12 @@ public function setImageUrl(?string $imageUrl): static
         if (!$this->categories->contains($category)) {
             $this->categories->add($category);
         }
-
         return $this;
     }
 
     public function removeCategory(Categorie $category): static
     {
         $this->categories->removeElement($category);
-
         return $this;
     }
 }

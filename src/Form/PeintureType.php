@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class PeintureType extends AbstractType
 {
@@ -21,11 +22,15 @@ class PeintureType extends AbstractType
                 'widget' => 'single_text'
             ])
             ->add('description')
-            ->add('imageFile', FileType::class, [
-                'label' => 'Image',
-                'required' => false,
-                'mapped' => false
-            ]);
+            ->add('imageUrl', UrlType::class, [
+        'label' => 'Lien URL de l\'image (optionnel)',
+        'required' => false,
+    ])
+    ->add('imageFile', FileType::class, [
+        'label' => 'Fichier image (upload local, optionnel)',
+        'required' => false,
+        'mapped' => false
+    ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
