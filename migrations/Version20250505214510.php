@@ -40,21 +40,19 @@ final class Version20250505214510 extends AbstractMigration
     //     SQL);
     // }
     public function up(Schema $schema): void
-    {
-        // Add image_url to peinture table
-        //$this->addSql('ALTER TABLE peinture ADD image_url VARCHAR(255) DEFAULT NULL');
-    
-        // Drop constraint and column from user (if this is intentional)
-        $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649A21BD112');
-        $this->addSql('DROP INDEX UNIQ_8D93D649A21BD112 ON user');
-        $this->addSql('ALTER TABLE user DROP personne_id, DROP cin, CHANGE type type VARCHAR(255) NOT NULL');
-    
-        // NOTE: We REMOVE this line because it causes the migration to fail
-        $this->addSql('ALTER TABLE personne CHANGE id id INT NOT NULL');
-    
-        // Keep the foreign key from personne to user if needed
-        $this->addSql('ALTER TABLE personne ADD CONSTRAINT FK_FCEC9EFBF396750 FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE');
-    }
+{
+    // Ajouter le champ image_url
+    //$this->addSql('ALTER TABLE peinture ADD image_url VARCHAR(255) DEFAULT NULL');
+
+    // Si nécessaire, tu peux garder ou commenter ces lignes selon l’état réel de ta base :
+    // $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649A21BD112');
+    // $this->addSql('DROP INDEX UNIQ_8D93D649A21BD112 ON user');
+    // $this->addSql('ALTER TABLE user DROP personne_id, DROP cin, CHANGE type type VARCHAR(255) NOT NULL');
+
+    // Foreign key entre personne et user
+    //$this->addSql('ALTER TABLE personne ADD CONSTRAINT FK_FCEC9EFBF396750 FOREIGN KEY (id) REFERENCES user (id) ON DELETE CASCADE');
+}
+
     
     public function down(Schema $schema): void
     {

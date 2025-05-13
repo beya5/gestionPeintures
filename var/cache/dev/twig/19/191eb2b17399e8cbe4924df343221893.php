@@ -102,7 +102,7 @@ class __TwigTemplate_abd95fad092236dde19301b4ebc1789a extends Template
     
     <a href=\"";
         // line 9
-        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_user_dashboard");
+        yield $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_peinture_index");
         yield "\" class=\"btn btn-secondary mb-3\">
         ← Retour aux peintures
     </a>
@@ -209,7 +209,7 @@ class __TwigTemplate_abd95fad092236dde19301b4ebc1789a extends Template
 <div class=\"container mt-4\">
     <h1>Mes Commentaires</h1>
     
-    <a href=\"{{ path('app_user_dashboard') }}\" class=\"btn btn-secondary mb-3\">
+    <a href=\"{{ path('app_peinture_index') }}\" class=\"btn btn-secondary mb-3\">
         ← Retour aux peintures
     </a>
 

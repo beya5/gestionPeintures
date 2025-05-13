@@ -2,6 +2,6 @@ vich_uploader:
     db_driver: orm
     mappings:
         peinture_image:
-            uri_prefix: /uploads/peintures
+            uri_prefix: /images/peintures
             upload_destination: '%kernel.project_dir%/public/uploads/peintures'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer  # Ou 'OriginalFileNamer'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

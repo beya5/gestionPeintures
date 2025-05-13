@@ -6,27 +6,33 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 class PeintureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
-    {
-        $builder
-            ->add('nom')
-            ->add('largeur')
-            ->add('hauteur')
-            ->add('prix')
-            ->add('enVente')
-            ->add('dateRealisation', null, [
-                'widget' => 'single_text'
-            ])
-            ->add('description')
-            ->add('imageFile', FileType::class, [
-                'label' => 'Image',
-                'required' => false,
-                'mapped' => false
-            ]);
-    }
+{
+    $builder
+        ->add('nom')
+        ->add('largeur')
+        ->add('hauteur')
+        ->add('prix')
+        ->add('enVente')
+        ->add('dateRealisation', null, [
+            'widget' => 'single_text'
+        ])
+        ->add('description')
+
+        ->add('imageUrl', UrlType::class, [
+    'label' => 'URL d’une image (en ligne)',
+    'required' => false,
+])
+->add('imageFile', FileType::class, [
+    'label' => 'Télécharger une image',
+    'required' => false,
+    'mapped' => false,
+]);
+}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

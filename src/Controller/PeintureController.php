@@ -27,34 +27,43 @@ class PeintureController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/peinture/new', name: 'app_peinture_new')]
-    public function new(Request $request, EntityManagerInterface $em): Response
-    {
-        $peinture = new Peinture();
-        $form = $this->createForm(PeintureType::class, $peinture);
-        $form->handleRequest($request);
+    #[Route('/peinture/new', name: 'app_peinture_new')]
+public function new(Request $request, EntityManagerInterface $em): Response
+{
+    $peinture = new Peinture();
+    $form = $this->createForm(PeintureType::class, $peinture);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $imageFile = $form->get('imageFile')->getData();
+    if ($form->isSubmitted() && $form->isValid()) {
+        $imageFile = $form->get('imageFile')->getData();
+        $imageUrlInput = $form->get('imageUrl')->getData(); 
+
+        if ($imageFile) {
+            $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+            $imageFile->move(
+                $this->getParameter('kernel.project_dir') . '/public/images/peintures',
+                $newFilename
+            );
             
-            if ($imageFile) {
-                $newFilename = uniqid().'.'.$imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('kernel.project_dir').'/public/images/peintures',
-                    $newFilename
-                );
-                $peinture->setImageName($newFilename);
-            }
-
-            $em->persist($peinture);
-            $em->flush();
-
-            return $this->redirectToRoute('app_peinture_index');
+            $peinture->setImageUrl('/images/peintures/' . $newFilename);
+        } elseif ($imageUrlInput) {
+            
+            $peinture->setImageUrl($imageUrlInput);
+        } else {
+            $peinture->setImageUrl('/images/starry.jpg');
         }
 
-        return $this->render('peinture/new.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $em->persist($peinture);
+        $em->flush();
+
+        return $this->redirectToRoute('app_peinture_index');
     }
+
+    return $this->render('peinture/new.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
 
     #[Route('/{id}', name: 'app_peinture_show', methods: ['GET', 'POST'])]
     public function show(Request $request, Peinture $peinture, EntityManagerInterface $entityManager): Response

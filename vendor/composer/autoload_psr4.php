@@ -13,6 +13,7 @@ return array(
     'Twig\\Extra\\String\\' => array($vendorDir . '/twig/string-extra'),
     'Twig\\Extra\\Html\\' => array($vendorDir . '/twig/html-extra'),
     'Twig\\' => array($vendorDir . '/twig/twig/src'),
+    'Symfony\\WebpackEncoreBundle\\' => array($vendorDir . '/symfony/webpack-encore-bundle/src'),
     'Symfony\\UX\\TwigComponent\\' => array($vendorDir . '/symfony/ux-twig-component/src'),
     'Symfony\\UX\\Turbo\\' => array($vendorDir . '/symfony/ux-turbo/src'),
     'Symfony\\UX\\StimulusBundle\\' => array($vendorDir . '/symfony/stimulus-bundle/src'),

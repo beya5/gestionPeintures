@@ -191,94 +191,98 @@ function handleImageError(img) {
                 <div class=\"card-img-container\" style=\"height: 250px; background: #f8f9fa;\">
                     ";
             // line 51
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "imageName", [], "any", false, false, false, 51)) {
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "imageUrl", [], "any", false, false, false, 51)) {
                 // line 52
-                yield "                        <img src=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/peintures/" . CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "imageName", [], "any", false, false, false, 52))), "html", null, true);
+                yield "    <img src=\"";
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "imageUrl", [], "any", false, false, false, 52)), "html", null, true);
                 yield "\" 
-                             class=\"img-fluid w-100 h-100 object-fit-cover\"
-                             alt=\"";
+         class=\"img-fluid w-100 h-100 object-fit-cover\"
+         alt=\"";
                 // line 54
                 yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "nom", [], "any", false, false, false, 54), "html", null, true);
                 yield "\"
-                             loading=\"lazy\"
-                             onerror=\"handleImageError(this)\">
-                    ";
+         loading=\"lazy\"
+         onerror=\"this.src='";
+                // line 56
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("images/default.jpg"), "html", null, true);
+                yield "'\">
+";
             } else {
                 // line 58
-                yield "                        <div class=\"h-100 d-flex justify-content-center align-items-center\">
-                            <i class=\"bi bi-image text-muted fs-1\"></i>
-                        </div>
-                    ";
+                yield "    <div class=\"h-100 d-flex justify-content-center align-items-center\">
+        <i class=\"bi bi-image fs-1 text-muted\"></i>
+    </div>
+";
             }
             // line 62
-            yield "                </div>
+            yield "
+                </div>
 
                 <div class=\"card-body\">
                     <h5 class=\"card-title\">";
-            // line 65
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "nom", [], "any", false, false, false, 65), "html", null, true);
+            // line 66
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "nom", [], "any", false, false, false, 66), "html", null, true);
             yield "</h5>
                     
                     <div class=\"d-flex flex-wrap gap-2 mb-2\">
                         <span class=\"badge bg-dark\">
                             ";
-            // line 69
-            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "dateRealisation", [], "any", false, false, false, 69)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "dateRealisation", [], "any", false, false, false, 69), "Y"), "html", null, true)) : ("Sans date"));
+            // line 70
+            yield ((CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "dateRealisation", [], "any", false, false, false, 70)) ? ($this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatDate(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "dateRealisation", [], "any", false, false, false, 70), "Y"), "html", null, true)) : ("Sans date"));
             yield "
                         </span>
                         <span class=\"badge bg-primary\">
                             ";
-            // line 72
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "largeur", [], "any", false, false, false, 72), "html", null, true);
+            // line 73
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "largeur", [], "any", false, false, false, 73), "html", null, true);
             yield "x";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "hauteur", [], "any", false, false, false, 72), "html", null, true);
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "hauteur", [], "any", false, false, false, 73), "html", null, true);
             yield " cm
                         </span>
                         ";
-            // line 74
-            if (CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "enVente", [], "any", false, false, false, 74)) {
-                // line 75
+            // line 75
+            if (CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "enVente", [], "any", false, false, false, 75)) {
+                // line 76
                 yield "                            <span class=\"badge bg-success\">
                                 ";
-                // line 76
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "prix", [], "any", false, false, false, 76), 2, ",", " "), "html", null, true);
+                // line 77
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Twig\Extension\CoreExtension']->formatNumber(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "prix", [], "any", false, false, false, 77), 2, ",", " "), "html", null, true);
                 yield " TND
                             </span>
                         ";
             }
-            // line 79
+            // line 80
             yield "                    </div>
 
                     <div class=\"card-text text-muted mb-3\">
                         ";
-            // line 82
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $this->extensions['Twig\Extra\String\StringExtension']->createUnicodeString(Twig\Extension\CoreExtension::striptags(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "description", [], "any", false, false, false, 82))), "truncate", [100, "..."], "method", false, false, false, 82), "html", null, true);
+            // line 83
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, $this->extensions['Twig\Extra\String\StringExtension']->createUnicodeString(Twig\Extension\CoreExtension::striptags(CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "description", [], "any", false, false, false, 83))), "truncate", [100, "..."], "method", false, false, false, 83), "html", null, true);
             yield "
                     </div>
 
                     <div class=\"d-flex justify-content-between align-items-center\">
                         <a href=\"";
-            // line 86
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_peinture_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "id", [], "any", false, false, false, 86)]), "html", null, true);
+            // line 87
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_peinture_show", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "id", [], "any", false, false, false, 87)]), "html", null, true);
             yield "\" 
                            class=\"btn btn-sm btn-outline-primary\">
                             <i class=\"bi bi-eye me-1\"></i> Voir
                         </a>
                         
                         ";
-            // line 91
+            // line 92
             if ($this->extensions['Symfony\Bridge\Twig\Extension\SecurityExtension']->isGranted("ROLE_ADMIN")) {
-                // line 92
+                // line 93
                 yield "                        <a href=\"";
-                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_peinture_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "id", [], "any", false, false, false, 92)]), "html", null, true);
+                yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_peinture_edit", ["id" => CoreExtension::getAttribute($this->env, $this->source, $context["peinture"], "id", [], "any", false, false, false, 93)]), "html", null, true);
                 yield "\" 
                            class=\"btn btn-sm btn-outline-warning\">
                             <i class=\"bi bi-pencil me-1\"></i> Éditer
                         </a>
                         ";
             }
-            // line 97
+            // line 98
             yield "                    </div>
                 </div>
             </div>
@@ -286,9 +290,9 @@ function handleImageError(img) {
         ";
             $context['_iterated'] = true;
         }
-        // line 101
+        // line 102
         if (!$context['_iterated']) {
-            // line 102
+            // line 103
             yield "        <div class=\"col-12\">
             <div class=\"alert alert-info text-center\">
                 <i class=\"bi bi-info-circle me-2\"></i> Aucune peinture trouvée
@@ -299,7 +303,7 @@ function handleImageError(img) {
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_key'], $context['peinture'], $context['_parent'], $context['_iterated']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 108
+        // line 109
         yield "    </div>
 </div>
 ";
@@ -312,7 +316,7 @@ function handleImageError(img) {
         yield from [];
     }
 
-    // line 112
+    // line 113
     /**
      * @return iterable<null|scalar|\Stringable>
      */
@@ -325,7 +329,7 @@ function handleImageError(img) {
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 113
+        // line 114
         yield "<style>
     .card {
         transition: all 0.3s ease;
@@ -385,7 +389,7 @@ function handleImageError(img) {
      */
     public function getDebugInfo(): array
     {
-        return array (  329 => 113,  316 => 112,  303 => 108,  292 => 102,  290 => 101,  282 => 97,  273 => 92,  271 => 91,  263 => 86,  256 => 82,  251 => 79,  245 => 76,  242 => 75,  240 => 74,  233 => 72,  227 => 69,  220 => 65,  215 => 62,  209 => 58,  202 => 54,  196 => 52,  194 => 51,  189 => 48,  184 => 47,  180 => 45,  172 => 41,  170 => 40,  159 => 32,  153 => 29,  148 => 26,  145 => 24,  132 => 23,  109 => 10,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
+        return array (  333 => 114,  320 => 113,  307 => 109,  296 => 103,  294 => 102,  286 => 98,  277 => 93,  275 => 92,  267 => 87,  260 => 83,  255 => 80,  249 => 77,  246 => 76,  244 => 75,  237 => 73,  231 => 70,  224 => 66,  218 => 62,  212 => 58,  207 => 56,  202 => 54,  196 => 52,  194 => 51,  189 => 48,  184 => 47,  180 => 45,  172 => 41,  170 => 40,  159 => 32,  153 => 29,  148 => 26,  145 => 24,  132 => 23,  109 => 10,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -440,17 +444,18 @@ function handleImageError(img) {
         <div class=\"col-md-4 mb-4\">
             <div class=\"card h-100 shadow-sm\">
                 <div class=\"card-img-container\" style=\"height: 250px; background: #f8f9fa;\">
-                    {% if peinture.imageName %}
-                        <img src=\"{{ asset('images/peintures/' ~ peinture.imageName) }}\" 
-                             class=\"img-fluid w-100 h-100 object-fit-cover\"
-                             alt=\"{{ peinture.nom }}\"
-                             loading=\"lazy\"
-                             onerror=\"handleImageError(this)\">
-                    {% else %}
-                        <div class=\"h-100 d-flex justify-content-center align-items-center\">
-                            <i class=\"bi bi-image text-muted fs-1\"></i>
-                        </div>
-                    {% endif %}
+                    {% if peinture.imageUrl %}
+    <img src=\"{{ asset(peinture.imageUrl) }}\" 
+         class=\"img-fluid w-100 h-100 object-fit-cover\"
+         alt=\"{{ peinture.nom }}\"
+         loading=\"lazy\"
+         onerror=\"this.src='{{ asset('images/default.jpg') }}'\">
+{% else %}
+    <div class=\"h-100 d-flex justify-content-center align-items-center\">
+        <i class=\"bi bi-image fs-1 text-muted\"></i>
+    </div>
+{% endif %}
+
                 </div>
 
                 <div class=\"card-body\">

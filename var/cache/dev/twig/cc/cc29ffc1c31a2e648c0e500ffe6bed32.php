@@ -147,19 +147,19 @@ function handleImageError(img) {
         <div class=\"col-md-8\">
             <div class=\"card mb-4\">
                 <div class=\"card-img-container\" style=\"height: 500px; background: #f8f9fa;\">
-                    ";
+                   ";
         // line 29
-        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 29, $this->source); })()), "imageName", [], "any", false, false, false, 29)) {
+        if (CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 29, $this->source); })()), "imageUrl", [], "any", false, false, false, 29)) {
             // line 30
-            yield "                        <img src=\"";
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape($this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl(("images/peintures/" . CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 30, $this->source); })()), "imageName", [], "any", false, false, false, 30))), "html", null, true);
-            yield "\" 
-                             class=\"h-100 w-100 object-fit-contain\"
-                             alt=\"";
-            // line 32
-            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 32, $this->source); })()), "nom", [], "any", false, false, false, 32), "html", null, true);
-            yield "\"
-                             onerror=\"handleImageError(this)\">
+            yield "
+                        <img src=\"";
+            // line 31
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 31, $this->source); })()), "imageUrl", [], "any", false, false, false, 31), "html", null, true);
+            yield "\" alt=\"";
+            yield $this->env->getRuntime('Twig\Runtime\EscaperRuntime')->escape(CoreExtension::getAttribute($this->env, $this->source, (isset($context["peinture"]) || array_key_exists("peinture", $context) ? $context["peinture"] : (function () { throw new RuntimeError('Variable "peinture" does not exist.', 31, $this->source); })()), "nom", [], "any", false, false, false, 31), "html", null, true);
+            yield "\">
+
+
                     ";
         } else {
             // line 35
@@ -406,7 +406,7 @@ function handleImageError(img) {
      */
     public function getDebugInfo(): array
     {
-        return array (  362 => 121,  349 => 120,  336 => 116,  330 => 113,  324 => 110,  321 => 109,  319 => 108,  312 => 104,  304 => 98,  298 => 95,  293 => 93,  289 => 92,  285 => 90,  283 => 89,  280 => 88,  276 => 86,  273 => 85,  264 => 82,  259 => 80,  255 => 79,  251 => 77,  246 => 76,  244 => 75,  231 => 65,  226 => 62,  217 => 60,  213 => 59,  208 => 56,  202 => 53,  199 => 52,  197 => 51,  190 => 49,  184 => 46,  177 => 42,  172 => 39,  166 => 35,  160 => 32,  154 => 30,  152 => 29,  145 => 24,  132 => 23,  109 => 10,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
+        return array (  362 => 121,  349 => 120,  336 => 116,  330 => 113,  324 => 110,  321 => 109,  319 => 108,  312 => 104,  304 => 98,  298 => 95,  293 => 93,  289 => 92,  285 => 90,  283 => 89,  280 => 88,  276 => 86,  273 => 85,  264 => 82,  259 => 80,  255 => 79,  251 => 77,  246 => 76,  244 => 75,  231 => 65,  226 => 62,  217 => 60,  213 => 59,  208 => 56,  202 => 53,  199 => 52,  197 => 51,  190 => 49,  184 => 46,  177 => 42,  172 => 39,  166 => 35,  157 => 31,  154 => 30,  152 => 29,  145 => 24,  132 => 23,  109 => 10,  102 => 6,  89 => 5,  66 => 3,  43 => 1,);
     }
 
     public function getSourceContext(): Source
@@ -439,11 +439,11 @@ function handleImageError(img) {
         <div class=\"col-md-8\">
             <div class=\"card mb-4\">
                 <div class=\"card-img-container\" style=\"height: 500px; background: #f8f9fa;\">
-                    {% if peinture.imageName %}
-                        <img src=\"{{ asset('images/peintures/' ~ peinture.imageName) }}\" 
-                             class=\"h-100 w-100 object-fit-contain\"
-                             alt=\"{{ peinture.nom }}\"
-                             onerror=\"handleImageError(this)\">
+                   {% if peinture.imageUrl %}
+
+                        <img src=\"{{ peinture.imageUrl }}\" alt=\"{{ peinture.nom }}\">
+
+
                     {% else %}
                         <div class=\"h-100 d-flex justify-content-center align-items-center\">
                             <i class=\"bi bi-image fs-1 text-muted\"></i>
